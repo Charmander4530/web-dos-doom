@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Doom 2 - Web Emulator</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-dos@7.3.0/dist/js-dos.min.js"></script>
+  <style>
+    html, body {
+      margin: 0; height: 100%; background: black;
+      display: flex; justify-content: center; align-items: center;
+    }
+    #dosbox {
+      width: 800px; height: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div id="dosbox"></div>
+  <script>
+    Dos(document.getElementById("dosbox"), {
+      wdosboxUrl: "https://js-dos.com/7.3/current/wdosbox.js"
+    }).ready().then(dos => {
+      dos.run("games/doom2/DOOM2.exe");
+    });
+  </script>
+</body>
+</html>
