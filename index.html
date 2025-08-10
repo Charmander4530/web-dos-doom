@@ -2,26 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Doom 2 - Web Emulator</title>
-  <script src="https://cdn.jsdelivr.net/npm/js-dos@7.3.0/dist/js-dos.min.js"></script>
+  <title>Web DOS Doom 2</title>
+  <script src="https://copy.sh/v86/build/libv86.js"></script>
   <style>
     html, body {
       margin: 0; height: 100%; background: black;
       display: flex; justify-content: center; align-items: center;
     }
-    #dosbox {
+    #emulator {
       width: 800px; height: 600px;
+      border: 2px solid #444;
     }
   </style>
 </head>
 <body>
-  <div id="dosbox"></div>
+  <div id="emulator"></div>
   <script>
-    Dos(document.getElementById("dosbox"), {
-      wdosboxUrl: "https://js-dos.com/7.3/current/wdosbox.js"
-    }).ready().then(dos => {
-      dos.run("games/doom2/DOOM2.exe");
+    var emulator = new V86Starter({
+      wasm_path: "https://copy.sh/v86/build/v86.wasm",
+      memory_size: 64 * 1024 * 1024,
+      vga_memory_size: 8 * 1024 * 1024,
+      screen_container: document.getElementById("emulator"),
+      bios: { url: "https://copy.sh/v86/images/seabios.bin" },
+      vga_bios: { url: "https://copy.sh/v86/images/vgabios.bin" },
+      cdrom: { url: "https://copy.sh/v86/images/freedos.iso" },
+      autostart: true,
+      filesystem: {
+        base_url: "https://charmander4530.github.io/web-dos-doom/dosfiles/",
+        base_fs: "/"
+      }
     });
   </script>
 </body>
 </html>
+
