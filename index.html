@@ -17,20 +17,19 @@
 <body>
   <div id="emulator"></div>
 
-  <!-- Load v86 library first -->
-  <script src="https://copy.sh/v86/build/libv86.js"></script>
+  <!-- Use jsDelivr CDN for libv86.js -->
+  <script src="https://cdn.jsdelivr.net/gh/copy/v86@master/build/libv86.js"></script>
 
-  <!-- Initialize emulator only after v86 lib is loaded -->
   <script>
     window.addEventListener('load', function() {
       var emulator = new V86Starter({
-        wasm_path: "https://copy.sh/v86/build/v86.wasm",
-        memory_size: 64 * 1024 * 1024,      // 64 MB RAM
-        vga_memory_size: 8 * 1024 * 1024,   // 8 MB video RAM
+        wasm_path: "https://cdn.jsdelivr.net/gh/copy/v86@master/build/v86.wasm",
+        memory_size: 64 * 1024 * 1024,
+        vga_memory_size: 8 * 1024 * 1024,
         screen_container: document.getElementById("emulator"),
-        bios: { url: "https://copy.sh/v86/images/seabios.bin" },
-        vga_bios: { url: "https://copy.sh/v86/images/vgabios.bin" },
-        cdrom: { url: "https://copy.sh/v86/images/freedos.iso" },
+        bios: { url: "https://cdn.jsdelivr.net/gh/copy/v86@master/images/seabios.bin" },
+        vga_bios: { url: "https://cdn.jsdelivr.net/gh/copy/v86@master/images/vgabios.bin" },
+        cdrom: { url: "https://cdn.jsdelivr.net/gh/copy/v86@master/images/freedos.iso" },
         autostart: true,
         filesystem: {
           base_url: "https://charmander4530.github.io/web-dos-doom/dosfiles/",
