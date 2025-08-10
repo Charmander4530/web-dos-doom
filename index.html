@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>Web DOS Doom 2</title>
-  <script src="https://copy.sh/v86/build/libv86.js"></script>
   <style>
     html, body {
       margin: 0; height: 100%; background: black;
@@ -17,22 +16,28 @@
 </head>
 <body>
   <div id="emulator"></div>
+
+  <!-- Load v86 library first -->
+  <script src="https://copy.sh/v86/build/libv86.js"></script>
+
+  <!-- Initialize emulator only after v86 lib is loaded -->
   <script>
-    var emulator = new V86Starter({
-      wasm_path: "https://copy.sh/v86/build/v86.wasm",
-      memory_size: 64 * 1024 * 1024,
-      vga_memory_size: 8 * 1024 * 1024,
-      screen_container: document.getElementById("emulator"),
-      bios: { url: "https://copy.sh/v86/images/seabios.bin" },
-      vga_bios: { url: "https://copy.sh/v86/images/vgabios.bin" },
-      cdrom: { url: "https://copy.sh/v86/images/freedos.iso" },
-      autostart: true,
-      filesystem: {
-        base_url: "https://charmander4530.github.io/web-dos-doom/dosfiles/",
-        base_fs: "/"
-      }
+    window.addEventListener('load', function() {
+      var emulator = new V86Starter({
+        wasm_path: "https://copy.sh/v86/build/v86.wasm",
+        memory_size: 64 * 1024 * 1024,      // 64 MB RAM
+        vga_memory_size: 8 * 1024 * 1024,   // 8 MB video RAM
+        screen_container: document.getElementById("emulator"),
+        bios: { url: "https://copy.sh/v86/images/seabios.bin" },
+        vga_bios: { url: "https://copy.sh/v86/images/vgabios.bin" },
+        cdrom: { url: "https://copy.sh/v86/images/freedos.iso" },
+        autostart: true,
+        filesystem: {
+          base_url: "https://charmander4530.github.io/web-dos-doom/dosfiles/",
+          base_fs: "/"
+        }
+      });
     });
   </script>
 </body>
 </html>
-
